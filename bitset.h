@@ -56,11 +56,11 @@ typedef unsigned long bitset_index_t;
 
 #else // USE_INLINE is defined
 
-static inline bitset_index_t bitset_size(bitset_t name) {
+inline bitset_index_t bitset_size(bitset_t name) {
     return name[0];
 }
 
-static inline void bitset_setbit(bitset_t name, bitset_index_t index, bool value) {
+inline void bitset_setbit(bitset_t name, bitset_index_t index, bool value) {
     if (index >= bitset_size(name)) {
         // exits the program
         error_exit("bitset_setbit: Index %lu mimo rozsah 0..%lu", (unsigned long)index, (unsigned long)bitset_size(name)-1);
@@ -72,7 +72,7 @@ static inline void bitset_setbit(bitset_t name, bitset_index_t index, bool value
     }
 }
 
-static inline bool bitset_getbit(bitset_t name, bitset_index_t index) {
+inline bool bitset_getbit(bitset_t name, bitset_index_t index) {
     if (index >= bitset_size(name)) {
         // exits the program
         error_exit("bitset_getbit: Index %lu mimo rozsah 0..%lu", (unsigned long)index, (unsigned long)bitset_size(name)-1);
