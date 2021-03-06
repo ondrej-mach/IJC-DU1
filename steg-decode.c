@@ -1,3 +1,9 @@
+// primes.c
+// Řešení IJC-DU1, příklad a), 6.3.2021
+// Autor: Ondřej Mach, FIT
+// Přeloženo: gcc 9.3.0
+// definice START_BYTE lze zmenit, urcuje na kterem bajtu zacina sifra
+
 #include "ppm.h"
 #include "eratosthenes.h"
 #include "bitset.h"

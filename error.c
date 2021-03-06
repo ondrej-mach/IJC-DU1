@@ -1,3 +1,8 @@
+// error.c
+// Řešení IJC-DU1, příklad a), 6.3.2021
+// Autor: Ondřej Mach, FIT
+// Přeloženo: gcc 9.3.0
+
 #include "error.h"
 
 #include <stdio.h>

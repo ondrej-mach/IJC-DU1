@@ -1,3 +1,8 @@
+// bitset.h
+// Řešení IJC-DU1, příklad a), 6.3.2021
+// Autor: Ondřej Mach, FIT
+// Přeloženo: gcc 9.3.0
+
 #ifndef _BITSET_H
 #define _BITSET_H
 
