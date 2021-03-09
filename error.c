@@ -11,9 +11,9 @@
 
 void warning_msg(const char *format, ...) {
     va_list args;
-    va_start (args, format);
-    vfprintf (stderr, format, args);
-    va_end (args);
+    va_start(args, format);
+    vfprintf(stderr, format, args);
+    va_end(args);
 }
 
 void error_exit(const char *format, ...) {

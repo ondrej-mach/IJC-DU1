@@ -46,6 +46,7 @@ int main(int argc, char **argv) {
                 // test for terminating zero
                 if (msg[msgIndex/CHAR_BIT - 1] == '\0') {
                     // end of hidden message
+                    terminated = true;
                     break;
                 }
             }
