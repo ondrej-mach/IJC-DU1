@@ -9,31 +9,39 @@
 #include "bitset.h"
 #include "eratosthenes.h"
 
-// calculate primes from 0 to N-1 (N is not included)
+// calculate primes from 0 to N (N is not included)
 #define N 200000000UL
 // how many primes from the end sohould be printed
 #define PRINT_LAST_N 10
 
+// prints last N primes from bitset, where 0s are primes.
+// toPrint parameter says, how many numbers are still left to print
 void printLast(bitset_t array, int toPrint, bitset_index_t start) {
-    if (toPrint == 0) {
+    // if there is nothing left to print, end recursion
+    if ((toPrint == 0) || (start == 0)) {
         return;
     }
 
-    do {
-        start -= 1;
+    // search until you find a prime
+    while (bitset_getbit(array, start) != 0) {
+        start--;
+        // if you are at the beginning of the bitset, return without recursion
         if (start == 0) {
             return;
         }
-    } while (bitset_getbit(array, start) == 1);
-
-    printLast(array, toPrint-1, start);
+    }
+    // recursive call
+    printLast(array, toPrint-1, start-1);
     printf("%lu\n", start);
 }
 
-int main() {
+int main(void) {
     clock_t start = clock();
+    // define and initialize the bitset
     bitset_create(array, N);
+    // find the primes
     Eratosthenes(array);
     printLast(array, PRINT_LAST_N, N);
+    // print the time in specified format
     fprintf(stderr, "Time=%.3g\n", (double)(clock()-start)/CLOCKS_PER_SEC);
 }
