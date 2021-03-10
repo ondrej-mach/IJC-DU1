@@ -13,6 +13,7 @@
 
 
 #define START_BYTE 23
+#define MESSAGE_LENGTH 10000
 
 
 int main(int argc, char **argv) {
@@ -29,11 +30,12 @@ int main(int argc, char **argv) {
     bitset_alloc(mask, N);
     Eratosthenes(mask);
 
-    char msg[1000] = {0, };
+    char msg[MESSAGE_LENGTH] = {0, };
     // counts in bits
     unsigned long msgIndex = 0;
     bool terminated = false;
-
+    
+    // the cycle has to stop before the image or decoded string buffer is overrun
     for (unsigned long i=START_BYTE; i<N; i++) {
         // if byte is at the right index
         if (bitset_getbit(mask, i) == 0) {
@@ -49,6 +51,10 @@ int main(int argc, char **argv) {
                     terminated = true;
                     break;
                 }
+                // make sure, that the buffer doesnt overflow
+                if (msgIndex/CHAR_BIT >= MESSAGE_LENGTH) {
+                    break;
+                }
             }
         }
     }
@@ -56,7 +62,7 @@ int main(int argc, char **argv) {
     if (!terminated) {
         ppm_free(img);
         bitset_free(mask);
-        error_exit("Dekódovaný řetězec není ukončen '\\0'");
+        error_exit("Dekódovaný řetězec je neukončený '\\0', nebo příliš dlouhý.\n");
     }
 
     printf("%s", msg);
