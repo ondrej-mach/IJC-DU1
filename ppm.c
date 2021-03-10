@@ -10,20 +10,25 @@
 #include <stdbool.h>
 #include <string.h>
 
+// Maximum image width and height
 #define MAX_IMAGE_SIZE 8000
 
 bool isWhitespace(char c) {
     return (c == ' ') || (c == '\t') || (c == '\r') || (c == '\n');
 }
 
+// allocates a ppm structure, reads file's contents into it
+// then returns a pointer to that structure
+// if anything fails, function prints a warning and returns NULL
 struct ppm *ppm_read(const char *filename) {
-
+    // open the file for binary read
     FILE* f = fopen(filename, "rb");
     if (f == NULL) {
         warning_msg("Nelze otevřít soubor %s\n", filename);
         return NULL;
     }
-
+    
+    // various constants from file's header
     char magic[3];
     unsigned maxValue;
     unsigned xsize;
