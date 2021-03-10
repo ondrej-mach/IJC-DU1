@@ -1,0 +1,6 @@
+*.o
+*.ppm
+primes
+primes-i
+steg-decode
+*.zip
