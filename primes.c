@@ -11,7 +11,7 @@
 
 // calculate primes from 0 to N (N is not included)
 #define N 200000000UL
-// how many primes from the end sohould be printed
+// how many primes from the end should be printed
 #define PRINT_LAST_N 10
 
 // prints last N primes from bitset, where 0s are primes.
@@ -41,7 +41,7 @@ int main(void) {
     bitset_create(array, N);
     // find the primes
     Eratosthenes(array);
-    printLast(array, PRINT_LAST_N, N);
+    printLast(array, PRINT_LAST_N, N-1);
     // print the time in specified format
     fprintf(stderr, "Time=%.3g\n", (double)(clock()-start)/CLOCKS_PER_SEC);
 }
