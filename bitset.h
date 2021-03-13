@@ -47,7 +47,7 @@ typedef unsigned long bitset_index_t;
 // sets the bit to the value passed
 #define _bitset_setbit_nocheck(name, index, value) (value ? _bitset_set(name, index) : _bitset_clear(name, index))
 // checks the bounds before setting th bit
-#define bitset_setbit(name, index, value) (_bitset_in_range(name,index) ? _bitset_setbit_nocheck(name, index, value) : (_bitset_setbit_error(name, index), 0))
+#define bitset_setbit(name, index, value) (_bitset_in_range(name, (bitset_index_t)index) ? _bitset_setbit_nocheck(name, (bitset_index_t)index, value) : (_bitset_setbit_error(name, (bitset_index_t)index), 0))
 
 
 #define _bitset_getbit_error(name, index) error_exit("bitset_getbit: Index %lu mimo rozsah 0..%lu", (unsigned long)index, (unsigned long)bitset_size(name)-1)
@@ -56,7 +56,7 @@ typedef unsigned long bitset_index_t;
 // Finally do bitwise AND with 1 to eliminate every other bit
 #define _bitset_getbit_nocheck(name, index) ((name[1UL + index / UL_SIZE_BITS] >> (index % UL_SIZE_BITS)) & 1UL)
 
-#define bitset_getbit(name, index) (_bitset_in_range(name,index) ? _bitset_getbit_nocheck(name, index) : (_bitset_getbit_error(name, index), 0))
+#define bitset_getbit(name, index) (_bitset_in_range(name, (bitset_index_t)index) ? _bitset_getbit_nocheck(name, (bitset_index_t)index) : (_bitset_getbit_error(name, (bitset_index_t)index), 0))
 
 
 #else // USE_INLINE is defined
