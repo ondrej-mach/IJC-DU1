@@ -1,5 +1,5 @@
 CC = gcc
-CCFLAGS = -g -std=c11 -pedantic -Wall -Wextra -O0
+CFLAGS = -g -std=c11 -pedantic -Wall -Wextra -O2
 XLOGIN = xmacho12
 LIBS = -lm
 
@@ -10,37 +10,19 @@ run: primes primes-i
 	./primes-i
 
 primes: primes.o eratosthenes.o error.o
-	$(CC) $(CCFLAGS) $^ $(LIBS) -o $@
+	$(CC) $(CFLAGS) $^ $(LIBS) -o $@
 
 primes-i: primes-i.o eratosthenes-i.o error.o bitset.o
-	$(CC) $(CCFLAGS) -DUSE_INLINE $^ $(LIBS) -o $@
+	$(CC) $(CFLAGS) -DUSE_INLINE $^ $(LIBS) -o $@
 
 steg-decode: steg-decode.o eratosthenes.o ppm.o error.o
-	$(CC) $(CCFLAGS) $^ $(LIBS) -o $@
-
-primes.o: primes.c bitset.h error.h
-	$(CC) $(CCFLAGS) -c $(filter %.c, $^)
+	$(CC) $(CFLAGS) $^ $(LIBS) -o $@
 	
 primes-i.o: primes.c bitset.h error.h
-	$(CC) $(CCFLAGS) -c -DUSE_INLINE $(filter %.c, $^) -o primes-i.o
-
-steg-decode.o: steg-decode.c bitset.h error.h
-	$(CC) $(CCFLAGS) -c $(filter %.c, $^)
-
-eratosthenes.o: eratosthenes.c bitset.h error.h
-	$(CC) $(CCFLAGS) -c $(filter %.c, $^)
+	$(CC) $(CFLAGS) -c -DUSE_INLINE $(filter %.c, $^) -o primes-i.o
 
 eratosthenes-i.o: eratosthenes.c bitset.h error.h
-	$(CC) $(CCFLAGS) -c -DUSE_INLINE -o eratosthenes-i.o $(filter %.c, $^)
-	
-bitset.o: bitset.c bitset.h
-	$(CC) $(CCFLAGS) -c -DUSE_INLINE $(filter %.c, $^)
-
-ppm.o: ppm.c error.h
-	$(CC) $(CCFLAGS) -c $(filter %.c, $^)
-
-error.o: error.c error.h
-	$(CC) $(CCFLAGS) -c $(filter %.c, $^)
+	$(CC) $(CFLAGS) -c -DUSE_INLINE -o eratosthenes-i.o $(filter %.c, $^)
 
 zip:
 	zip $(XLOGIN).zip *.c *.h Makefile
